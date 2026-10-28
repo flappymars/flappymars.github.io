@@ -1,0 +1,134 @@
+<!doctype html>
+<!--
+  La pagina iniziale di flappymars.com, fatta il 28 ottobre 2026 sul modello
+  di https://www.forestwoodsgaming.com/ (richiesta di Guido: «fai il nostro sito
+  come il suo»). Le sei righe e le loro parole le ha approvate Guido lo stesso
+  giorno («si»).
+
+  - Il video e' il nostro spot (m2TVzkjSf1E), che su YouTube resta «non in
+    elenco»: Guido, 28 ottobre, «si» a metterlo al posto di quello di Forest
+    Woods senza renderlo pubblico.
+  - Il video parte dentro la pagina quando lo si tocca, senza righe di avviso
+    (Guido, 28 ottobre: «la a»).
+  - La copertina del video (presa da YouTube) e il pulsante ufficiale di
+    Google Play stanno dentro il sito, cartella «immagini»: aprendo la pagina
+    non parte niente verso nessuno; il collegamento a YouTube parte solo
+    quando si tocca il video.
+  - Messa online il 28 ottobre 2026 su richiesta di Guido («Metti il sito
+    online»), prima dell'uscita: fino a quel giorno il pulsante porta chi non
+    e' nel test a una pagina «Not Found».
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flappy Mars</title>
+<meta name="description" content="Tap to fly a bird in a glass helmet over Mars. Every 10 rocks, the rules change.">
+<link rel="icon" type="image/png" href="immagini/icona.png">
+<style>
+  /* I colori vengono dal gioco: il fondo e' la tinta della schermata di
+     avvio (assets/gfx/avvio.png), le scritte quelle della pagina CREDITS. */
+  html, body { background: #280e34; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: #f8d8a8;
+    font-family: "Trebuchet MS", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    text-align: center;
+  }
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 10vh 16px 48px;
+  }
+  h1 { margin: 0; line-height: 0; }
+  h1 img {
+    width: 534px; /* il titolo del gioco, 178 x 48, ingrandito 3 volte */
+    max-width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+  }
+  p { margin: 0; font-size: 22px; line-height: 1.4; }
+  .frase { margin-top: 28px; }
+  .video {
+    position: relative;
+    margin: 50px auto;
+    max-width: 360px; /* lo spot e' uno Short, verticale */
+    aspect-ratio: 9 / 16;
+    background: #000;
+  }
+  .video button, .video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+  }
+  .video button { cursor: pointer; background: #000; }
+  .video button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .video button span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 68px;
+    height: 48px;
+    margin: -24px 0 0 -34px;
+    border-radius: 12px;
+    background: rgba(20, 6, 26, 0.85);
+  }
+  .video button span::after {
+    content: "";
+    position: absolute;
+    left: 27px;
+    top: 14px;
+    border-style: solid;
+    border-width: 10px 0 10px 18px;
+    border-color: transparent transparent transparent #f8d8a8;
+  }
+  .play { display: inline-block; margin-top: 24px; }
+  .play img { width: 200px; height: auto; display: block; }
+  footer { margin-top: 100px; }
+  footer a { color: #d9b98f; font-size: 18px; }
+</style>
+</head>
+<body>
+<main>
+  <h1><img src="immagini/titolo.png" alt="FLAPPY MARS" width="178" height="48"></h1>
+  <p class="frase">Tap to fly a bird in a glass helmet over Mars. Every 10 rocks, the rules change.</p>
+
+  <div class="video" data-video="m2TVzkjSf1E">
+    <button type="button" aria-label="Play video">
+      <img src="immagini/copertina-spot.jpg" alt="">
+      <span></span>
+    </button>
+  </div>
+
+  <p>Play Flappy Mars now</p>
+  <a class="play" href="https://play.google.com/store/apps/details?id=com.flappymars.game" target="_blank" rel="noopener">
+    <img src="immagini/google-play.png" alt="Get it on Google Play">
+  </a>
+
+  <footer>
+    <a href="https://flappymars.com/privacy">Privacy Policy</a>
+  </footer>
+</main>
+<script>
+  // Il video si collega a YouTube solo quando lo si tocca.
+  document.querySelectorAll('.video').forEach(function (box) {
+    box.querySelector('button').addEventListener('click', function () {
+      var frame = document.createElement('iframe');
+      frame.src = 'https://www.youtube-nocookie.com/embed/' + box.dataset.video + '?autoplay=1&rel=0';
+      frame.title = 'Flappy Mars video';
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      box.replaceChildren(frame);
+    });
+  });
+</script>
+</body>
+</html>
